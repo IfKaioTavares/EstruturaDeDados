@@ -29,14 +29,57 @@ void Insere(Lista *Lista, int dado){
 }
 
 Lista* separa (Lista* l, int n){
-    Lista *listaSeparada;
+    if(l->tamanho < 1){
+        return NULL;
+    }
+    Lista *listaSeparada = (Lista*)malloc(sizeof(Lista));
     Inicia(listaSeparada);
+    Apontador aux = l->Primeito->Prox;
+    Apontador auxAnterior = l->Primeito;
+    while(aux != NULL && aux->Dado != n){
+        aux = aux->Prox;
+        auxAnterior = auxAnterior->Prox;
+    }
+    if (aux == NULL) {
+        return NULL;
+    }
+
+    listaSeparada->Primeito->Prox = aux->Prox;
+    l->Ultimo = aux;
+    l->Ultimo->Prox = NULL;
+    Apontador aux2 = listaSeparada->Primeito->Prox;
+    while (aux2!=NULL){
+        listaSeparada->tamanho++;
+        aux2 = aux2->Prox;
+    }
+    l->tamanho -= listaSeparada->tamanho;
     return listaSeparada;
+}
+
+void Imprimir(Lista *Lista){
+    if(Lista->tamanho>0){
+        Apontador aux = Lista->Primeito->Prox;
+        for(int i=1; aux!=NULL; i++){
+            printf("%d- %d\n",i,aux->Dado);
+            aux = aux->Prox;
+        }
+    }else{
+        printf("Lista Vazia\n");
+    }
 }
 
 int main(){
     Lista lista1;
     Lista *lista2;
-    //lista1 = separa(&lista1, 3);
+    Inicia(&lista1);
+    Insere(&lista1,3);
+    Insere(&lista1,17);
+    Insere(&lista1,5);
+    Insere(&lista1,12);
+    Insere(&lista1,1);
+    lista2 = separa(&lista1, 5);
+    Imprimir(&lista1);
+    Imprimir(lista2);
+    return 0;
 
 }
