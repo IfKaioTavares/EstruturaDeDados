@@ -63,9 +63,9 @@ int main() {
     Insere(&listaAlunos, aluno4);
 
     printf("Lista de Alunos:\n");
-    Apontador aux = listaAlunos.Primeiro->Prox; // Começa do primeiro nó válido
+    Apontador aux = listaAlunos.Primeiro->Prox;
     while (aux != NULL) {
-        printf("Matrícula: %d, Nome: %s, Média: %.2f\n", aux->Aluno.matricula, aux->Aluno.nome, aux->Aluno.media);
+        printf("Matricula: %d, Nome: %s, Media: %.2f\n", aux->Aluno.matricula, aux->Aluno.nome, aux->Aluno.media);
         aux = aux->Prox;
     }
 

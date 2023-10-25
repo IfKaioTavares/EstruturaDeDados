@@ -45,6 +45,7 @@ Lista* separa (Lista* l, int n){
     }
 
     listaSeparada->Primeito->Prox = aux->Prox;
+    listaSeparada->Ultimo = l->Ultimo;
     l->Ultimo = aux;
     l->Ultimo->Prox = NULL;
     Apontador aux2 = listaSeparada->Primeito->Prox;
@@ -80,6 +81,7 @@ int main(){
     lista2 = separa(&lista1, 5);
     Imprimir(&lista1);
     Imprimir(lista2);
+    printf("\n%d %d", lista1.Ultimo->Dado, lista2->Ultimo->Dado);
     return 0;
 
 }
