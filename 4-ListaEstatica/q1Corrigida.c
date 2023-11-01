@@ -23,7 +23,7 @@ int empetyList(StaticList *List){
 }
 
 void addData(StaticList *List, Data data){
-    if(List->last == MaxLength -1){
+    if(List->last == MaxLength){
         printf("Lista cheia\n");
     }else{
         List->data[List->last] = data;
@@ -40,7 +40,7 @@ void showList(StaticList *List){
             printf("%d: %d\n", i+1, List->data[i].value);
         }
     }
-};
+}
 
 void addData_inPosition(StaticList *List, Data data, Pointer pos){
     if(List->last == MaxLength - 1){
@@ -111,13 +111,14 @@ void copyListsInverted(StaticList *list1, StaticList *list2){
 }
 
 void interleaveData(StaticList *list1, StaticList *list2, StaticList *list3){
-    int i = list1->first, j = list2->first, k = VetorStart;
+    int i = list1->first, j = list2->first;
     while (i < list1->last && j < list2->last){
         if(list1->data[i].value < list2->data[j].value){
             addData(list3,list1->data[i]);
             i++;
         }else{
             addData(list3,list2->data[j]);
+            j++;
         }
     }
 
@@ -127,9 +128,10 @@ void interleaveData(StaticList *list1, StaticList *list2, StaticList *list3){
         i++;
     }
 
-    while (j< list1->last)
+    while (j< list2->last)
     {
         addData(list3,list2->data[j]);
+        j++;
     }
     
 }
@@ -150,21 +152,37 @@ void deleteOcorrences(StaticList *List, Data data_to_delete){
 
 int main(){
     StaticList List1;
-    Data data1, data2, data3, data4, data5;
+    StaticList List2;
+    StaticList List3;
+
+    Data data1, data2, data3, data4, data5, data6, data7, data8, data9;
     StartList(&List1);
+    StartList(&List2);
+    StartList(&List3);
     data1.value = 1;
-    data2.value = 2;
-    data3.value = 3;
-    data4.value = 5;
-    data5.value = 4;
-    addData(&List1, data1);
-    addData(&List1, data1);
-    addData(&List1, data4);
-    addData(&List1, data1);
+    data2.value = 4;
+    data3.value = 6;
+    data4.value = 9;
+    data5.value = 10;
+
+    data6.value = 2;
+    data7.value = 5;
+    data8.value = 9;
+    data9.value = 11;
     addData(&List1, data1);
     addData(&List1, data2);
+    addData(&List1, data3);
+    addData(&List1, data4);
+    addData(&List1, data5);
+
+    addData(&List2, data6);
+    addData(&List2, data7);
+    addData(&List2, data8);
+    addData(&List2, data9);
     showList(&List1);
-    deleteOcorrences(&List1, data1);
-    showList(&List1);
+    showList(&List2);
+
+    interleaveData(&List1, &List2, &List3);
+    showList(&List3);
     return 0;
 }
