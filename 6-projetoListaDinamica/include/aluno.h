@@ -7,7 +7,18 @@ typedef struct Aluno
     int matricula;
     char nome[50];
     struct Curso *cursos;
-    struct Aluno *proximo;
 }Aluno;
+
+typedef struct NoAluno *Apontador;
+
+struct NoAluno{
+    Aluno Aluno;
+    Apontador Prox;
+};
+
+typedef struct ListaAlunos{
+    int tamanho;
+    Apontador Primeiro,Ultimo;
+}ListaAlunos;
 
 #endif
